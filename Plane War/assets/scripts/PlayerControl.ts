@@ -7,6 +7,7 @@ const { ccclass, property } = cc._decorator;
 export default class PlayerControl extends cc.Component {
   @property(cc.Prefab)
   bulletPre: cc.Prefab = null;
+
   isDie: boolean = false;
 
   start() {
@@ -26,8 +27,8 @@ export default class PlayerControl extends cc.Component {
   shoot() {
     // 加载音效
     cc.loader.loadRes("audio/lazer", cc.AudioClip, (src, clip) => {
-      let audioId = cc.audioEngine.playMusic(clip, false);
-      cc.audioEngine.setVolume(audioId, 0.3);
+      let audioId = cc.audioEngine.playEffect(clip, false);
+      cc.audioEngine.setVolume(audioId, 0.1);
     });
 
     // 创建子弹

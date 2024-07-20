@@ -2,7 +2,12 @@ const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class BgControl extends cc.Component {
-  start() {}
+  start() {
+    // 播放背景音乐
+    cc.loader.loadRes("audio/bg_music", cc.AudioClip, (err, src) => {
+      let audioId = cc.audioEngine.playMusic(src, true);
+    });
+  }
 
   update(dt) {
     // 移动

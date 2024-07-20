@@ -21,10 +21,9 @@ export default class EnemyControl extends cc.Component {
     // 移动
     if (!this.isDie) {
       this.node.y -= 300 * dt;
-    }
-
-    if (this.node.y < -40) {
-      this.node.destroy();
+      if (this.node.y < -40) {
+        this.node.destroy();
+      }
     }
   }
 
