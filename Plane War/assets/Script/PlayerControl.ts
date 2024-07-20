@@ -1,3 +1,4 @@
+import eBulletControl from "./eBulletControl";
 import EnemyControl from "./EnemyControl";
 
 const { ccclass, property } = cc._decorator;
@@ -37,6 +38,10 @@ export default class PlayerControl extends cc.Component {
     if (other.tag == 1) {
       this.die();
       other.getComponent(EnemyControl).die();
+    } else if (other.tag == 2) {
+      // 如果碰到子弹
+      this.die();
+      other.getComponent(eBulletControl).destroy();
     }
   }
 
