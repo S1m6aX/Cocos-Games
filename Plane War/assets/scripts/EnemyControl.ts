@@ -23,7 +23,7 @@ export default class EnemyControl extends cc.Component {
       this.node.y -= 300 * dt;
     }
 
-    if (this.node.y < -850) {
+    if (this.node.y < -40) {
       this.node.destroy();
     }
   }
@@ -44,12 +44,12 @@ export default class EnemyControl extends cc.Component {
   die() {
     this.isDie = true;
     // 加载爆炸图片
-    cc.loader.loadRes("enemy0_die", cc.SpriteFrame, (err, res) => {
+    cc.loader.loadRes("img/enemy1_down1", cc.SpriteFrame, (err, res) => {
       this.node.getComponent(cc.Sprite).spriteFrame = res;
     });
     // 加载爆炸音效
-    cc.loader.loadRes("explode", cc.AudioClip, (src, clip) => {
-      let audioId = cc.audioEngine.playMusic(clip, false);
+    cc.loader.loadRes("audio/explode", cc.AudioClip, (src, clip) => {
+      let audioId = cc.audioEngine.playEffect(clip, false);
       cc.audioEngine.setVolume(audioId, 1);
     });
     // 300毫秒后销毁

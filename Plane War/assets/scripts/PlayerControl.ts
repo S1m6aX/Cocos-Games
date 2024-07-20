@@ -25,7 +25,7 @@ export default class PlayerControl extends cc.Component {
 
   shoot() {
     // 加载音效
-    cc.loader.loadRes("lazer", cc.AudioClip, (src, clip) => {
+    cc.loader.loadRes("audio/lazer", cc.AudioClip, (src, clip) => {
       let audioId = cc.audioEngine.playMusic(clip, false);
       cc.audioEngine.setVolume(audioId, 0.3);
     });
@@ -55,12 +55,12 @@ export default class PlayerControl extends cc.Component {
     this.isDie = true;
 
     // 加载爆炸音效
-    cc.loader.loadRes("explode", cc.AudioClip, (src, clip) => {
-      let audioId = cc.audioEngine.playMusic(clip, false);
+    cc.loader.loadRes("audio/explode", cc.AudioClip, (src, clip) => {
+      let audioId = cc.audioEngine.playEffect(clip, false);
       cc.audioEngine.setVolume(audioId, 1);
     });
 
-    cc.loader.loadRes("hero1_die", cc.SpriteFrame, (err, res) => {
+    cc.loader.loadRes("img/hero1_die", cc.SpriteFrame, (err, res) => {
       this.node.getComponent(cc.Sprite).spriteFrame = res;
     });
 
