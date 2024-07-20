@@ -47,6 +47,11 @@ export default class EnemyControl extends cc.Component {
     cc.loader.loadRes("enemy0_die", cc.SpriteFrame, (err, res) => {
       this.node.getComponent(cc.Sprite).spriteFrame = res;
     });
+    // 加载爆炸音效
+    cc.loader.loadRes("explode", cc.AudioClip, (src, clip) => {
+      let audioId = cc.audioEngine.playMusic(clip, false);
+      cc.audioEngine.setVolume(audioId, 1);
+    });
     // 300毫秒后销毁
     setTimeout(() => {
       this.node.destroy();
