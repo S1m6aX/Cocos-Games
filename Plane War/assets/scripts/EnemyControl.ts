@@ -5,8 +5,11 @@ export default class EnemyControl extends cc.Component {
   @property(cc.Prefab)
   eBulletPre: cc.Prefab = null; // 子弹预设体
 
+  // 动画
+  private animation: cc.Animation = null;
+
   // 是否死亡
-  isDie: boolean = false;
+  private isDie: boolean = false;
 
   start() {
     this.shoot();
@@ -42,18 +45,32 @@ export default class EnemyControl extends cc.Component {
   //死亡
   die() {
     this.isDie = true;
-    // 加载爆炸图片
-    cc.loader.loadRes("img/enemy1_down1", cc.SpriteFrame, (err, res) => {
-      this.node.getComponent(cc.Sprite).spriteFrame = res;
-    });
+
     // 加载爆炸音效
-    cc.loader.loadRes("audio/explode", cc.AudioClip, (src, clip) => {
-      let audioId = cc.audioEngine.playEffect(clip, false);
-      cc.audioEngine.setVolume(audioId, 1);
-    });
-    // 300毫秒后销毁
-    setTimeout(() => {
-      this.node.destroy();
-    }, 300);
+    cc.resources.load(
+      "audio/explode",
+      cc.AudioClip,
+      (err, clip: cc.AudioClip) => {
+        if (err) {
+          console.error("Failed to load audio:", err);
+          return;
+        }
+        let audioId = cc.audioEngine.playEffect(clip, false);
+        cc.audioEngine.setVolume(audioId, 1);
+      }
+    );
+
+    // 加载爆炸动画
+    this.animation = this.node.getComponent(cc.Animation);
+    this.animation.play("enemy_down");
+
+    // 动画结束后摧毁节点
+    this.animation.on(
+      cc.Animation.EventType.FINISHED,
+      () => {
+        this.node.destroy();
+      },
+      this
+    );
   }
 }

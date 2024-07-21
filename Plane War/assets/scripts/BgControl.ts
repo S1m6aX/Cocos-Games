@@ -4,9 +4,17 @@ const { ccclass, property } = cc._decorator;
 export default class BgControl extends cc.Component {
   start() {
     // 播放背景音乐
-    cc.loader.loadRes("audio/bg_music", cc.AudioClip, (err, src) => {
-      let audioId = cc.audioEngine.playMusic(src, true);
-    });
+    cc.resources.load(
+      "audio/bg_music",
+      cc.AudioClip,
+      (err, src: cc.AudioClip) => {
+        if (err) {
+          console.error("Failed to load audio:", err);
+          return;
+        }
+        let audioId = cc.audioEngine.playMusic(src, true);
+      }
+    );
   }
 
   update(dt) {

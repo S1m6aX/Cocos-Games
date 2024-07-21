@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "player_blowup",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.8,
+  "sample": 5,
+  "speed": 2,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "62668872-1ed7-4df3-9ca4-a0984d85316e"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "23596c36-dac6-44d6-86d2-816f9b5ea07d"
+            }
+          },
+          {
+            "frame": 0.4,
+            "value": {
+              "__uuid__": "22bba090-4600-4f72-aa45-9cac09215acc"
+            }
+          },
+          {
+            "frame": 0.6,
+            "value": {
+              "__uuid__": "8e66365f-363a-4529-ad19-a236cf08d3fc"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 0.6,
+      "func": "over",
+      "params": []
+    }
+  ]
+}

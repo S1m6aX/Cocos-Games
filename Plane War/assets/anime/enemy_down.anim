@@ -1,0 +1,43 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "enemy_down",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.8,
+  "sample": 5,
+  "speed": 2,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "74d4c66b-1b77-4690-bab0-770a6e4a9f69"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "d1d70c18-a9b9-4342-9e77-5df52ea3c5ce"
+            }
+          },
+          {
+            "frame": 0.4,
+            "value": {
+              "__uuid__": "a9ddd19a-9884-431e-82d1-1f36585678b3"
+            }
+          },
+          {
+            "frame": 0.6,
+            "value": {
+              "__uuid__": "78afbb48-30ac-41b3-8c78-337e14ae46d2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

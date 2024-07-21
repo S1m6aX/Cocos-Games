@@ -8,45 +8,58 @@ export default class PlayerControl extends cc.Component {
   @property(cc.Prefab)
   bulletPre: cc.Prefab = null;
 
-  isDie: boolean = false;
+  private isDie: boolean = false;
+
+  private animation: cc.Animation = null;
 
   start() {
     if (!this.isDie) {
-      // 移动
+      // move
       this.node.on(cc.Node.EventType.TOUCH_MOVE, (event) => {
         this.node.setPosition(event.getLocation());
       });
-      // 攻击 计时器
+      // attack timer
       this.schedule(this.shoot, 0.5);
+
+      let animation = this.node.getComponent(cc.Animation);
+      animation.play("player_fly");
     }
 
-    // 开启碰撞检测
+    // enable collision
     cc.director.getCollisionManager().enabled = true;
   }
 
   shoot() {
-    // 加载音效
-    cc.loader.loadRes("audio/lazer", cc.AudioClip, (src, clip) => {
-      let audioId = cc.audioEngine.playEffect(clip, false);
-      cc.audioEngine.setVolume(audioId, 0.1);
-    });
+    // load sound effect
+    cc.resources.load(
+      "audio/lazer",
+      cc.AudioClip,
+      (err, clip: cc.AudioClip) => {
+        if (err) {
+          console.error("Failed to load audio:", err);
+          return;
+        }
+        let audioId = cc.audioEngine.playEffect(clip, false);
+        cc.audioEngine.setVolume(audioId, 0.1);
+      }
+    );
 
-    // 创建子弹
+    // create bullet
     let bullet = cc.instantiate(this.bulletPre);
-    // 设置父物体
+    // set parent
     bullet.setParent(cc.director.getScene());
-    // 设置位置
+    // set position
     bullet.x = this.node.x;
     bullet.y = this.node.y + 70;
   }
 
   onCollisionEnter(other) {
-    // 如果碰到敌人，双双销毁
+    // Both destroyed if hits enemy
     if (other.tag == 1) {
       this.die();
       other.getComponent(EnemyControl).die();
     } else if (other.tag == 2) {
-      // 如果碰到子弹
+      // if hits bullet
       this.die();
       other.getComponent(eBulletControl).destroy();
     }
@@ -55,19 +68,32 @@ export default class PlayerControl extends cc.Component {
   die() {
     this.isDie = true;
 
-    // 加载爆炸音效
-    cc.loader.loadRes("audio/explode", cc.AudioClip, (src, clip) => {
-      let audioId = cc.audioEngine.playEffect(clip, false);
-      cc.audioEngine.setVolume(audioId, 1);
-    });
+    // load explode sound
+    cc.resources.load(
+      "audio/explode",
+      cc.AudioClip,
+      (err, clip: cc.AudioClip) => {
+        if (err) {
+          console.error("Failed to load audio:", err);
+          return;
+        }
+        let audioId = cc.audioEngine.playEffect(clip, false);
+        cc.audioEngine.setVolume(audioId, 1);
+      }
+    );
 
-    cc.loader.loadRes("img/hero1_die", cc.SpriteFrame, (err, res) => {
-      this.node.getComponent(cc.Sprite).spriteFrame = res;
-    });
+    // Load and play blowup animation
+    this.animation = this.node.getComponent(cc.Animation);
+    this.animation.play("player_blowup");
 
-    setTimeout(() => {
-      this.node.destroy();
-    }, 300);
+    // Add an event listener for the animation end
+    this.animation.on(
+      "finished",
+      function () {
+        this.node.destroy();
+      },
+      this
+    );
   }
 
   update() {}
