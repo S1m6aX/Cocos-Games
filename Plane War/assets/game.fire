@@ -1154,11 +1154,9 @@
     },
     "_enabled": true,
     "enemyPre": {
-      "__uuid__": "3e774f34-b51d-4f33-8275-d5d5055dc1ae"
+      "__uuid__": "971ed84d-99a5-4aa1-ac3b-4344ab2b438a"
     },
-    "eBulletPre": {
-      "__uuid__": "c71dd13b-7c3f-4800-beeb-af2f584ccbe5"
-    },
+    "eBulletPre": null,
     "_id": "faW1dY30xJAasWzr+UANrg"
   },
   {
@@ -2962,7 +2960,7 @@
     "_is3DNode": false,
     "_groupIndex": 0,
     "groupIndex": 0,
-    "_id": "980rUPbVpJwJGv/VUXFqt7"
+    "_id": "84jEB5G6RILKk4sK0GsCtU"
   },
   {
     "__type__": "cc.Sprite",
@@ -2994,7 +2992,7 @@
     "_fillRange": 0,
     "_isTrimmedMode": true,
     "_atlas": null,
-    "_id": "c1l8HSn7hHZ7oeQL1L6gdn"
+    "_id": "52p0jIA81OXKAtKkblI13x"
   },
   {
     "__type__": "cc.BoxCollider",
@@ -3015,7 +3013,7 @@
       "width": 41,
       "height": 31.6
     },
-    "_id": "17cJs9/rhHJYfq29avLdbF"
+    "_id": "3170dtlDFKSZrC+m9DELDe"
   },
   {
     "__type__": "cc.Animation",
@@ -3034,7 +3032,7 @@
       }
     ],
     "playOnLoad": false,
-    "_id": "0fBx4QAR5Oi6aW29ObRokt"
+    "_id": "57HYsqWlNImI6e5V0gzMU/"
   },
   {
     "__type__": "0bd4elsHWxHVYh16w8iitAx",
@@ -3044,10 +3042,7 @@
       "__id__": 63
     },
     "_enabled": true,
-    "eBulletPre": {
-      "__uuid__": "c71dd13b-7c3f-4800-beeb-af2f584ccbe5"
-    },
-    "_id": "340DlNajtCzYb5re9zMFGK"
+    "_id": "30PQReuHVDRqMikI6jb57d"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -3055,7 +3050,7 @@
       "__id__": 63
     },
     "asset": {
-      "__uuid__": "3e774f34-b51d-4f33-8275-d5d5055dc1ae"
+      "__uuid__": "971ed84d-99a5-4aa1-ac3b-4344ab2b438a"
     },
     "fileId": "",
     "sync": false
