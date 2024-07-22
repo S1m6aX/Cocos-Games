@@ -1,12 +1,15 @@
 const { ccclass, property } = cc._decorator;
 
 @ccclass
-export default class TitleControl extends cc.Component {
+export default class GameReady extends cc.Component {
   @property(cc.Node)
   titleNode: cc.Node = null;
 
   @property(cc.Node)
   clickNode: cc.Node = null;
+
+  @property(cc.Node)
+  playerNode: cc.Node = null;
 
   private animation: cc.Animation = null;
 
@@ -34,6 +37,8 @@ export default class TitleControl extends cc.Component {
 
     // remove click event listener
     this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+
+    this.playerNode.active = true;
   }
 
   update(dt) {}

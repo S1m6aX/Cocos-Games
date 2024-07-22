@@ -8,28 +8,40 @@ export default class PlayerControl extends cc.Component {
   @property(cc.Prefab)
   bulletPre: cc.Prefab = null;
 
+  public isPause = false;
+
   private isDie: boolean = false;
 
   private animation: cc.Animation = null;
 
+  protected onLoad(): void {
+    this.node.active = false;
+  }
+
   start() {
-    if (!this.isDie) {
+    if (!this.isPause && !this.isDie) {
       // move
-      this.node.on(cc.Node.EventType.TOUCH_MOVE, (event) => {
-        this.node.setPosition(event.getLocation());
-      });
+      this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
       // attack timer
       this.schedule(this.shoot, 0.5);
 
       let animation = this.node.getComponent(cc.Animation);
       animation.play("player_fly");
     }
+  }
 
-    // enable collision
-    cc.director.getCollisionManager().enabled = true;
+  onTouchMove(event) {
+    // Stop movement if game paused
+    if (!this.isPause) {
+      this.node.setPosition(event.getLocation());
+    }
   }
 
   shoot() {
+    if (this.isPause || this.isDie) {
+      return;
+    }
+
     // load sound effect
     cc.resources.load(
       "audio/lazer",
