@@ -1,3 +1,4 @@
+import BulletControl from "./BulletControl";
 import eBulletControl from "./eBulletControl";
 import EnemyControl from "./EnemyControl";
 
@@ -8,10 +9,14 @@ export default class PlayerControl extends cc.Component {
   @property(cc.Prefab)
   bulletPre: cc.Prefab = null;
 
+  @property(cc.Node)
+  GamePlay: cc.Node = null;
+
+  @property(cc.Node)
+  BulletContainer: cc.Node = null;
+
   public isPause = false;
-
   private isDie: boolean = false;
-
   private animation: cc.Animation = null;
 
   protected onLoad(): void {
@@ -59,7 +64,7 @@ export default class PlayerControl extends cc.Component {
     // create bullet
     let bullet = cc.instantiate(this.bulletPre);
     // set parent
-    bullet.setParent(cc.director.getScene());
+    bullet.setParent(this.BulletContainer);
     // set position
     bullet.x = this.node.x;
     bullet.y = this.node.y + 70;
@@ -106,6 +111,32 @@ export default class PlayerControl extends cc.Component {
       },
       this
     );
+  }
+
+  pause() {
+    this.isPause = true;
+
+    if (this.BulletContainer) {
+      this.BulletContainer.children.forEach((bullet) => {
+        const bulletControl = bullet.getComponent(BulletControl);
+        if (bulletControl) {
+          bulletControl.isPause = true;
+        }
+      });
+    }
+  }
+
+  resume() {
+    this.isPause = false;
+
+    if (this.BulletContainer) {
+      this.BulletContainer.children.forEach((bullet) => {
+        const bulletControl = bullet.getComponent(BulletControl);
+        if (bulletControl) {
+          bulletControl.isPause = false;
+        }
+      });
+    }
   }
 
   update() {}

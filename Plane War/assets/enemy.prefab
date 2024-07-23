@@ -162,6 +162,7 @@
       "__id__": 1
     },
     "_enabled": true,
+    "EnemyManager": null,
     "_id": ""
   },
   {
