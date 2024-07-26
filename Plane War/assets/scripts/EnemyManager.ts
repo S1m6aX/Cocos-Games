@@ -2,68 +2,164 @@ import EnemyControl from "./EnemyControl";
 
 const { ccclass, property } = cc._decorator;
 
+type EnemyData = {
+  type: string;
+  hp: number;
+  speed: number;
+  width: number;
+  height: number;
+  img_fly: string;
+  img_hit: string;
+  anime: string;
+};
+
 @ccclass
 export default class EnemyManager extends cc.Component {
   @property(cc.Prefab)
-  enemyPre: cc.Prefab = null;
+  minionPre: cc.Prefab = null;
+
+  @property(cc.Prefab)
+  elitePre: cc.Prefab = null;
+
+  @property(cc.Prefab)
+  bossPre: cc.Prefab = null;
 
   @property(cc.Node)
   EnemyContainer: cc.Node = null;
 
   public isPause: boolean = false;
-  private spawnInterval: number = 2; // 敌机生成的间隔时间
-  public enemies: cc.Node[] = []; // 全局敌机列表
+  private spawnInterval: number = 2; // 初始敌机生成间隔时间
+  private spawnTimer: number = 0;
+  private difficultyTimer: number = 0;
+  private counter: number = 0;
 
-  spawn() {
-    let enemy = cc.instantiate(this.enemyPre);
-    enemy.y = this.node.y;
-    enemy.x = Math.random() * 400 + 20;
-    enemy.setParent(this.EnemyContainer);
-    // 获取生成的Enemy
-    let enemyControl = enemy.getComponent(EnemyControl);
-    if (enemyControl) {
-      // 向Enemy添加本节点
-      enemyControl.EnemyManager = this.node;
-    }
-    this.enemies.push(enemy); // 将敌机添加到全局列表
+  public minion: EnemyData = {
+    type: "Minion",
+    hp: 1,
+    speed: 200,
+    width: 51,
+    height: 39,
+    img_fly: "/img/enemy1",
+    img_hit: "",
+    anime: "enemy_down",
+  };
+
+  public elite: EnemyData = {
+    type: "Elite",
+    hp: 3,
+    speed: 150,
+    width: 69,
+    height: 89,
+    img_fly: "/img/enemy2",
+    img_hit: "elite_hit",
+    anime: "elite_down",
+  };
+
+  public boss: EnemyData = {
+    type: "Boss",
+    hp: 10,
+    speed: 100,
+    width: 165,
+    height: 246,
+    img_fly: "boss_fly",
+    img_hit: "boss_hit",
+    anime: "boss_down",
+  };
+
+  protected onLoad(): void {
+    this.node.active = false;
   }
 
   start() {
     this.scheduleSpawn();
   }
 
-  scheduleSpawn() {
+  update(dt: number) {
     if (!this.isPause) {
-      this.schedule(this.spawn, this.spawnInterval);
-    } else {
-      this.unschedule(this.spawn); // 取消定时任务
+      this.spawnTimer += dt;
+      this.difficultyTimer += dt;
+
+      if (this.spawnTimer >= this.spawnInterval) {
+        this.spawnTimer = 0;
+        this.spawnEnemy();
+      }
+
+      if (this.difficultyTimer >= 30) {
+        // 每30秒增加难度
+        this.difficultyTimer = 0;
+        this.increaseDifficulty();
+      }
     }
+  }
+
+  spawnEnemy() {
+    console.log(this.counter);
+    this.counter++;
+    if (this.counter % 5 === 0) {
+      this.spawn(this.elite);
+    }
+    if (this.counter % 20 === 0) {
+      this.spawn(this.boss);
+      console.log("boss coming");
+    } else {
+      this.spawn(this.minion);
+    }
+  }
+
+  spawn(enemy: EnemyData) {
+    let enemyNode = null;
+    switch (enemy.type) {
+      case "Minion":
+        enemyNode = cc.instantiate(this.minionPre);
+        break;
+      case "Elite":
+        enemyNode = cc.instantiate(this.elitePre);
+        break;
+      case "Boss":
+        enemyNode = cc.instantiate(this.bossPre);
+        break;
+    }
+
+    if (enemyNode) {
+      // 随机生成敌人位置
+      enemyNode.x = Math.floor(
+        Math.random() * Math.ceil(640 - enemy.width) +
+          Math.ceil(enemy.width / 2)
+      );
+      enemyNode.y = 1136 + Math.ceil(enemy.height / 2);
+      enemyNode.setParent(this.EnemyContainer);
+
+      // 初始化敌人属性
+      enemyNode.getComponent(EnemyControl).init(enemy);
+    }
+  }
+
+  scheduleSpawn() {
+    this.schedule(this.update, 0.1); // 更新频率
+  }
+
+  increaseDifficulty() {
+    this.spawnInterval = Math.max(0.5, this.spawnInterval - 0.2); // 最小间隔时间为0.5秒
+    // 可以增加更多的难度调整，如增加敌人的速度、生命值等
   }
 
   pause() {
     this.isPause = true;
-    this.scheduleSpawn(); // 停止敌机生成
+    this.unschedule(this.update); // 停止敌机生成
     // 暂停所有现有敌机
-
-    this.enemies.forEach((enemy) => {
-      const enemyControl = enemy.getComponent(EnemyControl);
-      if (enemyControl) {
-        enemyControl.isPause = true;
-      }
+    this.EnemyContainer.children.forEach((child) => {
+      const enemyControl = child.getComponent(EnemyControl);
+      enemyControl.isPause = true;
     });
   }
 
   resume() {
     this.isPause = false;
-    // 重新开始敌机生成
-    this.scheduleSpawn();
-
+    this.scheduleSpawn(); // 重新开始敌机生成
     // 恢复所有现有敌机
-    this.enemies.forEach((enemy) => {
-      const enemyControl = enemy.getComponent(EnemyControl);
-      if (enemyControl) {
-        enemyControl.isPause = false;
-      }
+    this.EnemyContainer.children.forEach((child) => {
+      const enemyControl = child.getComponent(EnemyControl);
+      enemyControl.isPause = false;
     });
   }
 }

@@ -1,5 +1,4 @@
 import BgControl from "./BgControl";
-import BulletControl from "./BulletControl";
 import EnemyManager from "./EnemyManager";
 import PlayerControl from "./PlayerControl";
 
@@ -13,7 +12,7 @@ export default class GamePause extends cc.Component {
   backgroundNode: cc.Node = null;
 
   @property(cc.Node)
-  enenmyManagerNode: cc.Node = null;
+  enemyManagerNode: cc.Node = null;
 
   start() {
     this.node.active = false;
@@ -28,42 +27,8 @@ export default class GamePause extends cc.Component {
   }
 
   getEnemyManager() {
-    return this.enenmyManagerNode.getComponent(EnemyManager);
+    return this.enemyManagerNode.getComponent(EnemyManager);
   }
-
-  //   gamePause() {
-  //     this.getPlayerControl().isPause = true;
-  //     this.getBackgroundControl().pause();
-  //     //this.getEnemyManager().pause();
-  //     console.log("调用 gamePause() 方法");
-
-  //     const enemyManager = cc.find("EnemyManagerNode").getComponent(EnemyManager); // 根据实际节点名称调整
-  //     if (enemyManager) {
-  //       enemyManager.pause();
-  //     } else {
-  //       console.warn("未找到 EnemyManager 组件");
-  //     }
-  //   }
-  // gamePause() {
-  //   const playerNode = cc.find("/GamePlay/player"); // 更新为正确的路径
-  //   if (playerNode) {
-  //     const playerControl = playerNode.getComponent(PlayerControl);
-  //     if (playerControl) {
-  //       playerControl.isPause = true;
-  //       playerControl.bullets.forEach((bullet) => {
-  //         bullet.getComponent(BulletControl).isPause = true;
-  //       });
-  //     }
-  //   }
-
-  //   const enemyManagerNode = cc.find("EnemyManager"); // 更新为正确的路径
-  //   if (enemyManagerNode) {
-  //     const enemyManager = enemyManagerNode.getComponent(EnemyManager);
-  //     if (enemyManager) {
-  //       enemyManager.pause();
-  //     }
-  //   }
-  // }
 
   gamePause() {
     this.getPlayerControl().pause();

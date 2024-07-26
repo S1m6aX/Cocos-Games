@@ -9,6 +9,9 @@ export default class BtnControl extends cc.Component {
   gamePauseNode: cc.Node = null;
 
   @property(cc.Node)
+  gameReadyNode: cc.Node = null;
+
+  @property(cc.Node)
   pauseButton: cc.Node = null;
 
   @property(cc.Node)
@@ -39,18 +42,18 @@ export default class BtnControl extends cc.Component {
   }
 
   onRestartButtonClick() {
-    cc.log("Restart button clicked");
     // 重新开始游戏逻辑
+    cc.director.loadScene(cc.director.getScene().name);
   }
 
   onContinueButtonClick() {
-    // 关闭GamePuase页面
+    // 关闭GamePause页面
     this.gamePauseNode.active = false;
     this.gamePauseNode.getComponent(GamePause).gameResume();
   }
 
   onHomeButtonClick() {
-    cc.log("Home button clicked");
     // 回到主页逻辑
+    cc.director.loadScene(cc.director.getScene().name);
   }
 }

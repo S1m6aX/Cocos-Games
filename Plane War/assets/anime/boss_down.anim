@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "boss_down",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 1.2,
+  "sample": 5,
+  "speed": 2,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "9aa8a9de-e2a4-4072-a10f-2f73c342dde1"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "5284c2b1-bcf7-4d51-8629-697fc11e61fb"
+            }
+          },
+          {
+            "frame": 0.4,
+            "value": {
+              "__uuid__": "4361c10c-d380-4470-9d47-aa77caaed734"
+            }
+          },
+          {
+            "frame": 0.6,
+            "value": {
+              "__uuid__": "fe28ab71-7eac-44d3-965f-0abf0087ed3f"
+            }
+          },
+          {
+            "frame": 0.8,
+            "value": {
+              "__uuid__": "191bb738-e4bf-4777-bd92-e0c58aa0779f"
+            }
+          },
+          {
+            "frame": 1,
+            "value": {
+              "__uuid__": "5341794d-701a-4703-aaeb-d4aa88950ea6"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

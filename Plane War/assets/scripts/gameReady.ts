@@ -11,6 +11,9 @@ export default class GameReady extends cc.Component {
   @property(cc.Node)
   playerNode: cc.Node = null;
 
+  @property(cc.Node)
+  enemyNode: cc.Node = null;
+
   private animation: cc.Animation = null;
 
   start() {
@@ -39,6 +42,7 @@ export default class GameReady extends cc.Component {
     this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
 
     this.playerNode.active = true;
+    this.enemyNode.active = true;
   }
 
   update(dt) {}

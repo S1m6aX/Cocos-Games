@@ -1,0 +1,25 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "elite_hit",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.25,
+  "sample": 4,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "b78828bf-ee79-406a-915b-2b25d939d8ea"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

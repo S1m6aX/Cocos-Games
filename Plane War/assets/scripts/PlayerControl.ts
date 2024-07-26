@@ -1,5 +1,4 @@
 import BulletControl from "./BulletControl";
-import eBulletControl from "./eBulletControl";
 import EnemyControl from "./EnemyControl";
 
 const { ccclass, property } = cc._decorator;
@@ -49,7 +48,7 @@ export default class PlayerControl extends cc.Component {
 
     // load sound effect
     cc.resources.load(
-      "audio/lazer",
+      "audio/razer",
       cc.AudioClip,
       (err, clip: cc.AudioClip) => {
         if (err) {
@@ -75,14 +74,13 @@ export default class PlayerControl extends cc.Component {
     if (other.tag == 1) {
       this.die();
       other.getComponent(EnemyControl).die();
-    } else if (other.tag == 2) {
-      // if hits bullet
-      this.die();
-      other.getComponent(eBulletControl).destroy();
     }
   }
 
   die() {
+    if (!this.node.active) {
+      return;
+    }
     this.isDie = true;
 
     // load explode sound
@@ -107,7 +105,7 @@ export default class PlayerControl extends cc.Component {
     this.animation.on(
       "finished",
       function () {
-        this.node.destroy();
+        this.node.active = false;
       },
       this
     );

@@ -1,0 +1,25 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "boos_hit",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.25,
+  "sample": 4,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "4790b81e-823b-4318-893e-d967eae305d6"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}

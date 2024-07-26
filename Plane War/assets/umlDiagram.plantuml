@@ -1,0 +1,114 @@
+@startuml Plane War
+
+class EnemyManager {
+  -enemyPre: cc.Prefab
+  -elitePre: cc.Prefab
+  -EnemyContainer: cc.Node
+  -isPause: boolean
+  -spawnInterval: number
+  -counter: number
+  +onLoad()
+  +start()
+  +spawn()
+  +scheduleSpawn()
+  +pause()
+  +resume()
+}
+
+class EnemyControl {
+  -isPause: boolean
+  -animation: cc.Animation
+  -isDie: boolean
+  -EnemyManager: cc.Node
+  +start()
+  +update(dt)
+  +die()
+}
+
+class BtnControl {
+  -gamePauseNode: cc.Node
+  -gameReadyNode: cc.Node
+  -pauseButton: cc.Node
+  -restartButton: cc.Node
+  -continueButton: cc.Node
+  -homeButton: cc.Node
+  +onLoad()
+  +bindButton(buttonNode, callback)
+  +onPauseButtonClick()
+  +onRestartButtonClick()
+  +onContinueButtonClick()
+  +onHomeButtonClick()
+}
+
+class EliteControl {
+  -isPause: boolean
+  -animation: cc.Animation
+  -isDie: boolean
+  -EnemyManager: cc.Node
+  -hp: number
+  +start()
+  +update(dt)
+  +die()
+}
+
+class GameReady {
+  -titleNode: cc.Node
+  -clickNode: cc.Node
+  -playerNode: cc.Node
+  -enemyNode: cc.Node
+  -animation: cc.Animation
+  +start()
+  +onTouchStart(event)
+  +update(dt)
+}
+
+class PlayerControl {
+  -bulletPre: cc.Prefab
+  -GamePlay: cc.Node
+  -BulletContainer: cc.Node
+  -isPause: boolean
+  -isDie: boolean
+  -animation: cc.Animation
+  +onLoad()
+  +start()
+  +onTouchMove(event)
+  +shoot()
+  +onCollisionEnter(other)
+  +die()
+  +pause()
+  +resume()
+  +update()
+}
+
+class BulletControl {
+  -speed: number
+  -isPause: boolean
+  +start()
+  +update(dt)
+  +onCollisionEnter(other)
+}
+
+class BgControl {
+  -bgMusic: cc.AudioClip
+  -isPause: boolean
+  -audioId: number
+  +start()
+  +update(dt)
+  +playMusic()
+  +pause()
+  +resume()
+}
+
+class GamePause {
+  -playerNode: cc.Node
+  -backgroundNode: cc.Node
+  -enemyManagerNode: cc.Node
+  +start()
+  +getPlayerControl()
+  +getBackgroundControl()
+  +getEnemyManager()
+  +gamePause()
+  +gameResume()
+}
+
+@enduml
