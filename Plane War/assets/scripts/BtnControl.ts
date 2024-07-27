@@ -23,6 +23,9 @@ export default class BtnControl extends cc.Component {
   @property(cc.Node)
   homeButton: cc.Node = null;
 
+  @property(cc.Node)
+  scoreManager: cc.Node = null;
+
   onLoad() {
     this.bindButton(this.pauseButton, this.onPauseButtonClick);
     this.bindButton(this.restartButton, this.onRestartButtonClick);

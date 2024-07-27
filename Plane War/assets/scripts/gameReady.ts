@@ -1,3 +1,5 @@
+import GamePlay from "./GamePlay";
+
 const { ccclass, property } = cc._decorator;
 
 @ccclass
@@ -13,6 +15,12 @@ export default class GameReady extends cc.Component {
 
   @property(cc.Node)
   enemyNode: cc.Node = null;
+
+  @property(cc.Node)
+  buffNode: cc.Node = null;
+
+  @property(cc.Node)
+  gamePaly: cc.Node = null;
 
   private animation: cc.Animation = null;
 
@@ -43,6 +51,8 @@ export default class GameReady extends cc.Component {
 
     this.playerNode.active = true;
     this.enemyNode.active = true;
+    this.buffNode.active = true;
+    this.gamePaly.getComponent(GamePlay).startTimer();
   }
 
   update(dt) {}

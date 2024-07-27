@@ -20,6 +20,14 @@ export default class BulletControl extends cc.Component {
   }
 
   onCollisionEnter(other) {
+    if (
+      other.tag == 2 ||
+      other.tag === 3 ||
+      other.tag === 4 ||
+      other.tag === 5
+    ) {
+      return;
+    }
     this.node.destroy();
   }
 }

@@ -11,6 +11,7 @@ type EnemyData = {
   img_fly: string;
   img_hit: string;
   anime: string;
+  point: number;
 };
 
 @ccclass
@@ -27,6 +28,12 @@ export default class EnemyManager extends cc.Component {
   @property(cc.Node)
   EnemyContainer: cc.Node = null;
 
+  @property(cc.Node)
+  scoreManager: cc.Node = null;
+
+  @property(cc.Node)
+  playerNode: cc.Node = null;
+
   public isPause: boolean = false;
   private spawnInterval: number = 2; // 初始敌机生成间隔时间
   private spawnTimer: number = 0;
@@ -42,6 +49,7 @@ export default class EnemyManager extends cc.Component {
     img_fly: "/img/enemy1",
     img_hit: "",
     anime: "enemy_down",
+    point: 1,
   };
 
   public elite: EnemyData = {
@@ -53,6 +61,7 @@ export default class EnemyManager extends cc.Component {
     img_fly: "/img/enemy2",
     img_hit: "elite_hit",
     anime: "elite_down",
+    point: 3,
   };
 
   public boss: EnemyData = {
@@ -64,6 +73,7 @@ export default class EnemyManager extends cc.Component {
     img_fly: "boss_fly",
     img_hit: "boss_hit",
     anime: "boss_down",
+    point: 10,
   };
 
   protected onLoad(): void {
@@ -93,14 +103,12 @@ export default class EnemyManager extends cc.Component {
   }
 
   spawnEnemy() {
-    console.log(this.counter);
     this.counter++;
     if (this.counter % 5 === 0) {
       this.spawn(this.elite);
     }
     if (this.counter % 20 === 0) {
       this.spawn(this.boss);
-      console.log("boss coming");
     } else {
       this.spawn(this.minion);
     }
@@ -122,15 +130,15 @@ export default class EnemyManager extends cc.Component {
 
     if (enemyNode) {
       // 随机生成敌人位置
-      enemyNode.x = Math.floor(
-        Math.random() * Math.ceil(640 - enemy.width) +
-          Math.ceil(enemy.width / 2)
-      );
-      enemyNode.y = 1136 + Math.ceil(enemy.height / 2);
+      enemyNode.x = Math.random() * (641 - enemy.width) + enemy.width / 2;
+
+      enemyNode.y = 1136 + enemy.height / 2;
       enemyNode.setParent(this.EnemyContainer);
 
       // 初始化敌人属性
-      enemyNode.getComponent(EnemyControl).init(enemy);
+      enemyNode
+        .getComponent(EnemyControl)
+        .init(enemy, this.scoreManager, this.playerNode);
     }
   }
 

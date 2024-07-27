@@ -142,6 +142,7 @@
       "__id__": 1
     },
     "_enabled": true,
+    "ScoreManager": null,
     "_id": ""
   },
   {

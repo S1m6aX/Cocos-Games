@@ -1,3 +1,6 @@
+import PlayerControl from "./PlayerControl";
+import ScoreManager from "./ScoreManager";
+
 const { ccclass, property } = cc._decorator;
 
 type EnemyData = {
@@ -9,17 +12,21 @@ type EnemyData = {
   img_fly: string;
   img_hit: string;
   anime: string;
+  point: number;
 };
 
 @ccclass
 export default class EnemyControl extends cc.Component {
-  // @property(cc.Prefab)
-  // eBulletPre: cc.Prefab = null; // 子弹预设体
+  @property(cc.Node)
+  ScoreManager: cc.Node = null;
+
+  @property(cc.Node)
+  playerNode: cc.Node = null;
 
   public isPause: boolean = false;
   public EnemyManager: cc.Node = null;
   private animation: cc.Animation = null; // 动画
-  private isDie: boolean = false; // 是否死亡s
+  private isDie: boolean = false; // 是否死亡
   private originalSpriteFrame: cc.SpriteFrame;
 
   private type: string;
@@ -30,11 +37,11 @@ export default class EnemyControl extends cc.Component {
   private img_fly: string;
   private img_hit: string;
   private anime: string;
+  private point: number;
 
   start() {}
 
   update(dt) {
-    // 移动
     if (!this.isPause && !this.isDie) {
       this.node.y -= this.speed * dt;
       if (this.node.y < -1 * this.height) {
@@ -43,7 +50,7 @@ export default class EnemyControl extends cc.Component {
     }
   }
 
-  protected init(enemy: EnemyData) {
+  protected init(enemy: EnemyData, scoreManager: cc.Node, playerNode: cc.Node) {
     this.type = enemy.type;
     this.hp = enemy.hp;
     this.speed = enemy.speed;
@@ -52,6 +59,9 @@ export default class EnemyControl extends cc.Component {
     this.img_fly = enemy.img_fly;
     this.img_hit = enemy.img_hit;
     this.anime = enemy.anime;
+    this.point = enemy.point;
+    this.ScoreManager = scoreManager;
+    this.playerNode = playerNode;
 
     if (this.type === "Boss") {
       this.node.getComponent(cc.Animation).play(this.img_fly);
@@ -74,28 +84,28 @@ export default class EnemyControl extends cc.Component {
 
   onCollisionEnter(other) {
     if (other.tag == 2) {
+      this.playerNode.getComponent(PlayerControl).bulletHit += 1;
       this.hp--;
       if (this.hp == 0) {
         this.die();
         return;
       }
-      // 播放被击中动画
+
       const animation = this.node.getComponent(cc.Animation);
       const sprite = this.node.getComponent(cc.Sprite);
+
       if (animation) {
+        animation.off(cc.Animation.EventType.FINISHED); // 先移除旧的回调
         if (this.type === "Boss") {
-          // Boss 播放被击中动画，之后恢复飞行动画
           animation.play(this.img_hit);
           animation.on(
             cc.Animation.EventType.FINISHED,
             () => {
-              // 播放飞行动画以恢复
               animation.play(this.img_fly);
             },
             this
           );
         } else {
-          // 对于其他类型的敌人，播放被击中动画并恢复原始spriteFrame
           animation.play(this.img_hit);
           animation.on(
             cc.Animation.EventType.FINISHED,
@@ -113,17 +123,14 @@ export default class EnemyControl extends cc.Component {
     }
   }
 
-  //死亡
   die() {
     this.isDie = true;
 
-    // 禁用碰撞组件
     const collider = this.node.getComponent(cc.Collider);
     if (collider) {
       collider.enabled = false;
     }
 
-    // 加载爆炸音效
     cc.resources.load(
       "audio/explode",
       cc.AudioClip,
@@ -137,11 +144,9 @@ export default class EnemyControl extends cc.Component {
       }
     );
 
-    // 加载爆炸动画
     this.animation = this.node.getComponent(cc.Animation);
     this.animation.play(this.anime);
 
-    // 动画结束后摧毁节点
     this.animation.on(
       cc.Animation.EventType.FINISHED,
       () => {
@@ -149,27 +154,8 @@ export default class EnemyControl extends cc.Component {
       },
       this
     );
+
+    const scoreMgr = this.ScoreManager.getComponent(ScoreManager);
+    scoreMgr.updateScore(this.point);
   }
-
-  /**
-   * 在enemies中删除该Enemy节点
-   */
-
-  // shoot() {
-  //   let bullet = cc.instantiate(this.eBulletPre);
-  //   // 设置子弹到场景中
-  //   bullet.setParent(cc.director.getScene());
-  //   // bullet.x = this.node.x;
-  //   // bullet.y = this.node.y - 30;
-  //   bullet.setPosition(this.node.position.x, this.node.position.y - 30);
-
-  //   // 确保子弹控制脚本正确附加
-  //   let bulletControl = bullet.getComponent("eBulletControl");
-  // }
 }
-//this.shoot();
-// 只调度一次射击
-//if (!this.isDie) {
-// 每秒调用一次shoot
-// this.schedule(this.shoot, 2);
-//}

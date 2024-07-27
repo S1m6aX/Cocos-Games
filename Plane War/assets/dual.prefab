@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "minion",
+    "_name": "dual",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -45,8 +45,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 51,
-      "height": 38
+      "width": 58,
+      "height": 87
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -57,8 +57,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        26,
-        1156,
+        461.656,
+        1180,
         0,
         0,
         0,
@@ -98,7 +98,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "de356f22-70b9-47a2-80b0-3d19d620ada7"
+      "__uuid__": "a4ca3e0c-75d9-4747-949a-46eb0524dee5"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -115,33 +115,13 @@
     "_id": ""
   },
   {
-    "__type__": "cc.Animation",
+    "__type__": "82913TPXjRBaL7GO38zN+ne",
     "_name": "",
     "_objFlags": 0,
     "node": {
       "__id__": 1
     },
     "_enabled": true,
-    "_defaultClip": {
-      "__uuid__": "61d14373-e5ee-4a72-a3ca-46128e01edc8"
-    },
-    "_clips": [
-      {
-        "__uuid__": "61d14373-e5ee-4a72-a3ca-46128e01edc8"
-      }
-    ],
-    "playOnLoad": false,
-    "_id": ""
-  },
-  {
-    "__type__": "0bd4elsHWxHVYh16w8iitAx",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "ScoreManager": null,
     "_id": ""
   },
   {
@@ -152,7 +132,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "tag": 1,
+    "tag": 3,
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -161,105 +141,95 @@
     "points": [
       {
         "__type__": "cc.Vec2",
-        "x": -4.5,
-        "y": 19
+        "x": 5.4,
+        "y": -38.7
       },
       {
         "__type__": "cc.Vec2",
-        "x": -12.5,
-        "y": 18
+        "x": 9.1,
+        "y": -36
       },
       {
         "__type__": "cc.Vec2",
-        "x": -12.5,
-        "y": 12
+        "x": 23.3,
+        "y": -31.1
       },
       {
         "__type__": "cc.Vec2",
-        "x": -8.5,
-        "y": 10
+        "x": 26.2,
+        "y": -27
       },
       {
         "__type__": "cc.Vec2",
-        "x": -20.5,
-        "y": 10
+        "x": 20.3,
+        "y": -20.8
       },
       {
         "__type__": "cc.Vec2",
-        "x": -23.5,
-        "y": 7
+        "x": 23.1,
+        "y": -18.1
       },
       {
         "__type__": "cc.Vec2",
-        "x": -23.5,
-        "y": 3
+        "x": 22.7,
+        "y": -15.2
       },
       {
         "__type__": "cc.Vec2",
-        "x": -16.5,
-        "y": -4
+        "x": 20.6,
+        "y": -13.3
       },
       {
         "__type__": "cc.Vec2",
-        "x": -14.5,
-        "y": -4
+        "x": 15.1,
+        "y": -12
       },
       {
         "__type__": "cc.Vec2",
-        "x": -14.5,
-        "y": -7
+        "x": 1.1,
+        "y": -15.9
       },
       {
         "__type__": "cc.Vec2",
-        "x": -11.5,
-        "y": -7
+        "x": -1.1,
+        "y": -14.2
       },
       {
         "__type__": "cc.Vec2",
-        "x": -3.5,
-        "y": -16
+        "x": -8.2,
+        "y": -15.3
       },
       {
         "__type__": "cc.Vec2",
-        "x": 6.5,
-        "y": -15
+        "x": -9.5,
+        "y": -18
       },
       {
         "__type__": "cc.Vec2",
-        "x": 25.5,
-        "y": 4
+        "x": -16,
+        "y": -20.8
       },
       {
         "__type__": "cc.Vec2",
-        "x": 25.5,
-        "y": 7
+        "x": -11.1,
+        "y": -40
       },
       {
         "__type__": "cc.Vec2",
-        "x": 22.5,
-        "y": 10
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": 7.5,
-        "y": 10
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": 9.5,
-        "y": 12
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": 14.5,
-        "y": 13
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": 12.5,
-        "y": 19
+        "x": -4.4,
+        "y": -39.7
       }
     ],
+    "_id": ""
+  },
+  {
+    "__type__": "82913TPXjRBaL7GO38zN+ne",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
     "_id": ""
   },
   {
