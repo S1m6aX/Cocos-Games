@@ -66,6 +66,11 @@ export default class EnemyControl extends cc.Component {
     if (this.type === "Boss") {
       this.node.getComponent(cc.Animation).play(this.img_fly);
     } else {
+      if (this.type == "Minion") {
+        this.speed = Math.random() * 300 + 150;
+      } else {
+        this.speed = Math.random() * 150 + 150;
+      }
       cc.resources.load(
         this.img_fly,
         cc.SpriteFrame,
@@ -86,7 +91,10 @@ export default class EnemyControl extends cc.Component {
     if (other.tag == 2) {
       this.playerNode.getComponent(PlayerControl).bulletHit += 1;
       this.hp--;
-      if (this.hp == 0) {
+      if (this.hp <= 0) {
+        if (this.isDie) {
+          return;
+        }
         this.die();
         return;
       }
@@ -124,6 +132,9 @@ export default class EnemyControl extends cc.Component {
   }
 
   die() {
+    if (this.isDie) {
+      return;
+    }
     this.isDie = true;
 
     const collider = this.node.getComponent(cc.Collider);

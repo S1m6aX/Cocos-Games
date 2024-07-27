@@ -82,6 +82,7 @@ export default class EnemyManager extends cc.Component {
 
   start() {
     this.scheduleSpawn();
+    this.scheduleSpawn();
   }
 
   update(dt: number) {
@@ -147,7 +148,7 @@ export default class EnemyManager extends cc.Component {
   }
 
   increaseDifficulty() {
-    this.spawnInterval = Math.max(0.5, this.spawnInterval - 0.2); // 最小间隔时间为0.5秒
+    this.spawnInterval = Math.max(0.1, this.spawnInterval - 0.2); // 最小间隔时间为0.5秒
     // 可以增加更多的难度调整，如增加敌人的速度、生命值等
   }
 

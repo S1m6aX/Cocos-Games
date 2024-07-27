@@ -21,8 +21,8 @@ export default class BuffManager extends cc.Component {
   // onLoad () {}
 
   start() {
-    this.schedule(this.spawnBoom, Math.random() * 120 + 45);
-    this.schedule(this.spawnDual, Math.random() * 60 + 30);
+    this.schedule(this.spawnBoom, Math.random() * 45 + 45);
+    this.schedule(this.spawnDual, Math.random() * 25 + 20);
   }
 
   spawnBoom() {

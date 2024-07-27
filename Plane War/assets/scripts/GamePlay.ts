@@ -20,7 +20,6 @@ export default class GamePlay extends cc.Component {
       while (this.elapsedTime >= this.timerInterval) {
         this.elapsedTime -= this.timerInterval;
         this.gameTime += this.timerInterval;
-        console.log(this.gameTime);
       }
     }
   }
