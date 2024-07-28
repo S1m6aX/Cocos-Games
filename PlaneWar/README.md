@@ -33,4 +33,4 @@
 如果您有任何建议或想要贡献代码，请提交Pull Request或创建Issue。
 
 
-![UML图](https://github.com/yourusername/yourrepository/assets/1.png](https://github.com/S1m6aX/Cocos-Games/blob/master/PlaneWar/UML.png))
+![UML图](https://github.com/S1m6aX/Cocos-Games/blob/master/PlaneWar/UML.png)
