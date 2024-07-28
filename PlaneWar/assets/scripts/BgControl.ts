@@ -19,8 +19,8 @@ export default class BgControl extends cc.Component {
       // Move background
       for (let bgNode of this.node.children) {
         bgNode.y -= 50 * dt;
-        if (bgNode.y < -bgNode.height) {
-          bgNode.y += bgNode.height * 2;
+        if (bgNode.y < -bgNode.height * 1.3) {
+          bgNode.y += bgNode.height * 1.3 * 2;
         }
       }
     }

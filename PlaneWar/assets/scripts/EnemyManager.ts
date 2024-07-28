@@ -133,7 +133,7 @@ export default class EnemyManager extends cc.Component {
       // 随机生成敌人位置
       enemyNode.x = Math.random() * (641 - enemy.width) + enemy.width / 2;
 
-      enemyNode.y = 1136 + enemy.height / 2;
+      enemyNode.y = 1280 + enemy.height / 2;
       enemyNode.setParent(this.EnemyContainer);
 
       // 初始化敌人属性

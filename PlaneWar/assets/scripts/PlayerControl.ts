@@ -108,6 +108,12 @@ export default class PlayerControl extends cc.Component {
       rightBullet.setPosition(this.node.x + 32, this.node.y + 30);
 
       this.bulletCount += 2;
+
+      // 播放音效
+      if (this.shootAudioClip) {
+        let audioId = cc.audioEngine.playEffect(this.shootAudioClip, false);
+        cc.audioEngine.setVolume(audioId, 0.1);
+      }
     }
   }
 

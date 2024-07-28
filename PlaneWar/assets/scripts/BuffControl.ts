@@ -12,7 +12,7 @@ export default class BuffControl extends cc.Component {
       this.node.y -= dt * this.speed;
     }
     if (this.node.y < -110) {
-      this.destroy;
+      this.node.destroy();
     }
   }
 

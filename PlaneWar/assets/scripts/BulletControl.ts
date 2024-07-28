@@ -13,7 +13,7 @@ export default class BulletControl extends cc.Component {
     if (!this.isPause) {
       this.node.y += this.speed * dt;
       // 出屏幕销毁
-      if (this.node.y > 1146) {
+      if (this.node.y > 1280) {
         this.node.destroy();
       }
     }

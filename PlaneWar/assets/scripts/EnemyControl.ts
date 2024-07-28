@@ -44,7 +44,7 @@ export default class EnemyControl extends cc.Component {
   update(dt) {
     if (!this.isPause && !this.isDie) {
       this.node.y -= this.speed * dt;
-      if (this.node.y < -1 * this.height) {
+      if (this.node.y < -1 * this.height - 100) {
         this.node.destroy();
       }
     }
